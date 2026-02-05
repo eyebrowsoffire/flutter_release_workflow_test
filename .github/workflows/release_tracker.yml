@@ -92,7 +92,7 @@ jobs:
 
             body += '- [ ] Pin engine hash in `engine.version` if necessary\n'
 
-            if (channel !== 'stable' && hotfix === 'true') {
+            if (channel === 'stable' && hotfix === 'true') {
               body += '- [ ] Add changelog for stable release\n';
             }
 
