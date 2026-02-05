@@ -18,6 +18,10 @@ on:
         required: true
         type: boolean
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   create_issue:
     runs-on: ubuntu-latest
