@@ -88,7 +88,7 @@ jobs:
             if (channel === 'beta' && hotfix !== 'true') {
               body += '  - [ ] Create `release-candidate-branch.version` file on candidate branch\n';
             } else {
-              body += `- [ ] Merge outstanding ([cherry-picks](https://github.com/${context.repo.owner}/${context.repo.repo}/pulls?q=is%3Apr+is%3Aopen+label%3A"cp%3A+review"))\n`;
+              body += `- [ ] Merge outstanding [cherry-picks](https://github.com/${context.repo.owner}/${context.repo.repo}/pulls?q=is%3Apr+is%3Aopen+label%3A"cp%3A+review")\n`;
               body += '- [ ] Update Dart version if necessary\n';
               body += '  - Dart Hash: [Paste the Dart hash here]\n';
             }
