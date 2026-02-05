@@ -83,9 +83,12 @@ jobs:
               body += '  - [ ] Create `release-candidate-branch.version` file on candidate branch\n';
             }
 
-            body += `- [ ] Merge outstanding ([cherry-picks](https://github.com/${context.repo.owner}/${context.repo.repo}/pulls?q=is%3Apr+is%3Aopen+label%3A"cp%3A+review"))\n`;
+            body += '#### Update release branch\n';
 
-            if (channel !== 'beta' || hotfix === 'true') {
+            if (channel === 'beta' && hotfix !== 'true') {
+              body += '  - [ ] Create `release-candidate-branch.version` file on candidate branch\n';
+            } else {
+              body += `- [ ] Merge outstanding ([cherry-picks](https://github.com/${context.repo.owner}/${context.repo.repo}/pulls?q=is%3Apr+is%3Aopen+label%3A"cp%3A+review"))\n`;
               body += '- [ ] Update Dart version if necessary\n';
               body += '  - Dart Hash: [Paste the Dart hash here]\n';
             }
@@ -96,7 +99,8 @@ jobs:
               body += '- [ ] Add changelog for stable release\n';
             }
 
-            body += '- [ ] Run postsubmits and validate they are all passing on the [Flutter Dashboard](https://flutter-dashboard.appspot.com/)\n';
+            body += '#### Validate and publish release\n'
+            body += `- [ ] Run postsubmits and validate they are all passing on the [Flutter Dashboard](https://flutter-dashboard.appspot.com/#/build?repo=flutter&branch=${branchName})\n`;
             body += '- [ ] Push release with MPA\n';
             body += '- [ ] Check for the new versions on the [Flutter SDK Archive](https://docs.flutter.dev/install/archive)\n';
 
