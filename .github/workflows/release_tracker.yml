@@ -80,7 +80,6 @@ jobs:
               body += '#### Cut release branches\n';
               body += '  - [ ] Cut new flutter branch: `' + branchName + '`\n';
               body += '  - [ ] Cut new recipes branch: `' + branchName + '` [Gerrit UI](https://flutter-review.googlesource.com/admin/repos/recipes,branches)\n';
-              body += '  - [ ] Create `release-candidate-branch.version` file on candidate branch\n';
             }
 
             body += '#### Update release branch\n';
