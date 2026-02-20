@@ -51,8 +51,9 @@ jobs:
         run: |
           # Create and switch to the new branch locally
           git checkout -b ${{ env.BRANCH_NAME }}
-                    
+
           # Create the version file
+          mkdir -p bin/internal/
           echo "${{ env.BRANCH_NAME }}" > bin/internal/release-candidate-branch.version
           
           # Commit the change
