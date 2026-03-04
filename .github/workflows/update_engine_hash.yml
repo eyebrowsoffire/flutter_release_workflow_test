@@ -1,0 +1,52 @@
+name: Sync Engine Version
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync-engine:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Update Engine Version
+        run: |
+          chmod +x bin/internal/last_engine_commit.sh
+          ./bin/internal/last_engine_commit.sh > bin/internal/engine.version
+
+      - name: Check for Changes
+        id: git-check
+        run: |
+          if git diff --exit-code bin/internal/engine.version; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create PR if Changed
+        if: steps.git-check.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Configure Git
+          git config user.name "[bot] Sync Engine Version"
+          git config user.email "<>"
+          
+          # Create and push a unique branch
+          BRANCH_NAME="update-engine-$(date +%s)"
+          git checkout -b "$BRANCH_NAME"
+          git add bin/internal/engine.version
+          git commit -m "chore: update engine.version to $(cat bin/internal/engine.version)"
+          git push origin "$BRANCH_NAME"
+          
+          # Use the GitHub CLI (pre-installed on runners) to create the PR
+          gh pr create \
+            --title "Sync engine.version." \
+            --body "Updates the engine.version file." \
+            --base ${{ github.ref_name }} \
+            --head "$BRANCH_NAME"
