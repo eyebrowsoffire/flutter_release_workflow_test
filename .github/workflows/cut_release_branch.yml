@@ -63,3 +63,7 @@ jobs:
       - name: Push new branch
         run: |
           git push origin ${{ env.BRANCH_NAME }}
+          git push origin ${{ env.BRANCH_NAME }}
+          echo "## Release Branch \`${{ env.BRANCH_NAME }}\` Cut Successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 **View Branch** https://github.com/$GITHUB_REPOSITORY/tree/${{ env.BRANCH_NAME }}" >> $GITHUB_STEP_SUMMARY
