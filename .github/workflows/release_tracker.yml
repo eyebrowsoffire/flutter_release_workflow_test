@@ -134,7 +134,5 @@ jobs:
               .addBreak()
               .addRaw(`### [Click here to view Issue #${issueResponse.data.number}](${issueResponse.data.html_url})`)
               .addBreak()
-              .addRaw(`---`)
-              .addBreak()
               .addRaw(`**Assignee:** @${context.actor}`)
               .write();
