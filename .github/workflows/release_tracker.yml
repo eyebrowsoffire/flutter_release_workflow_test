@@ -124,13 +124,18 @@ jobs:
             });
 
             const issueUrl = issueResponse.data.html_url;
+            const issueNumber = issueResponse.data.number;
 
             // Write a big, friendly button to the Job Summary
             await core.summary
               .addHeading('🚀 Release Tracker Created!')
-              .addRaw(`The release tracking issue for **${version}** has been successfully generated.`)
-              .addBreak()
-              .addRaw(`### [Click here to view Issue #${issueResponse.data.number}](${issueUrl})`)
+              .addRaw(`The release tracking issue for **${version}** has been successfully generated.`, true)
+              .addRaw(`### [View Issue #${issueNumber}](${issueUrl})`, true)
               .addSeparator()
-              .addRaw(`**Assignee:** @${context.actor}`)
+              .addTable([
+                [{data: 'Field', header: true}, {data: 'Value', header: true}],
+                ['Version', version],
+                ['Channel', channel],
+                ['Assignee', `@${context.actor}`]
+              ])
               .write();
