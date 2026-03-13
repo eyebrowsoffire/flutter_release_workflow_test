@@ -92,7 +92,7 @@ jobs:
               body += '  - Dart Hash: [Paste the Dart hash here]\n';
             }
 
-            body += `- [ ] Pin engine hash in `engine.version` if necessary ([GH Workflow](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/workflows/sync-engine-version.yml))\n`
+            body += '- [ ] Pin engine hash in `engine.version` if necessary' + `([GH Workflow](https://github.com/${context.repo.owner}/${context.repo.repo}/actions/workflows/sync-engine-version.yml))\n`
 
             if (channel === 'stable' && hotfix === 'true') {
               body += '- [ ] Add changelog for stable release\n';
