@@ -90,7 +90,7 @@ jobs:
           git commit -m "Update flutter DEPS to dart $DART_HASH"
           git push origin "$BRANCH_NAME" --force
           
-          PR_URL=(gh pr create \
+          PR_URL=$(gh pr create \
             --title "[${{ github.ref_name }}] Update Flutter DEPS to Dart ${{ inputs.dart_hash }}" \
             --body "This PR updates the transitive dependencies in the engine \`DEPS\` file based on Dart SDK hash \`${{ inputs.dart_hash }}\`." \
             --base ${{ github.ref_name }} \

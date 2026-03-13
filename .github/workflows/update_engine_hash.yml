@@ -61,7 +61,7 @@ jobs:
           git push origin "$BRANCH_NAME"
           
           # Use the GitHub CLI (pre-installed on runners) to create the PR
-          PR_URL=(gh pr create \
+          PR_URL=$(gh pr create \
             --title "[${{ github.ref_name }}] Sync engine.version to ${{ env.ENGINE_HASH }}" \
             --body "Updates the engine.version file." \
             --base ${{ github.ref_name }} \
